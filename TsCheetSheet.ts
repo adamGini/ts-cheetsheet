@@ -1,3 +1,5 @@
+// npm init -> npm i typescript -> npm i ts-node -> npx tsc --init
+
 // Basic types are unnecessary to anotate, ts infers these types - no need to fuss.
 // use all lowercase when anotating types. uppercase are a different thing.
 

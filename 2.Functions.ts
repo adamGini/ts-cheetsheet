@@ -48,7 +48,7 @@ interface Coordinate {
     y: number
 }
 
-function parseCoordinate(str: string): Coordinate;
+function parseCoordinate(str: string): Coordinate; // note, we can also use a type literal if we want to make sure only to use a specific string (for other usecases).
 function parseCoordinate(obj: Coordinate): Coordinate;
 function parseCoordinate(x: number, y: number): Coordinate;
 /* the type "unknown" is like any, but you have to cast it before you use it*/

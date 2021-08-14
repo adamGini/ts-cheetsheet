@@ -156,7 +156,7 @@ function liveDangerously(x?: number | null) {
 // Record - example of a usecase is an object full of numbers:
 //left side is the property type, right side is the value type
 
-type ObjOfNum = Record<string, number>
+type ObjOfNum = Record<string, number> // Record is a utility type, more on those in the utility type file
 const obj2: ObjOfNum = {
     foo: 6,
     bar: 12,

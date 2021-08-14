@@ -1,4 +1,5 @@
 //-----------------generics:
+// some of this was taken from here: https://youtu.be/nViEqpgwxHE
 console.log('-----------generics------------');
 
 // in the example below we have a type variable, that will change according to what is passed to it
@@ -18,6 +19,74 @@ function loggingIdentity<Type>(arg: Type[]): Type[] {
 }
 
 loggingIdentity([6, 4, 2])
+
+// Another example:
+const makeArr = <T,T2>(x:T,y:T2)=>{
+    return [x,y]
+}
+
+const arra = makeArr(4,"words")
+// Pretty straightforward, this function takes in 2 arguments, and returns them in an array.
+
+// If we hover over arra we can see the return type is a union. If we wanted it to be a tuple (see tuple file) we could specify as much:
+
+const makeArr1 = <T,T2>(x:T,y:T2):[T,T2]=>{
+    return [x,y]
+}
+
+const arra1 = makeArr1(4,"words")
+
+//either way, this function will work with any arguments. we can also declare a default type:
+const makeArr2 = <T,T2=unknown>(x:T,y:T2):[T,T2]=>{
+    return [x,y]
+}
+
+const arra2 = makeArr2(4, {prop:"value"})
+const arra3 = makeArr2(4, true)
+
+// We can also override the generic type and declare it ourselves:
+const arra4 = makeArr2<string,boolean>("words",false)
+//and since we have a default type for T2 we can also do it like so:
+const arra5 = makeArr2<number>(4,"yes")
+
+// Extending generic types:
+
+//say we have a function like so:
+const makeFullName = (obj:{firstName:string,lastName:string})=>{
+    return {
+        ...obj,
+        fullName:obj.firstName+' '+obj.lastName
+    }
+}
+const v1 = makeFullName({firstName:'Bob',lastName:'Marley'})
+// But what if we have an object that contains more than just the first and last name? Do we need to account for every single property and
+// start writing optional properties? Obviously not, we can do like so:
+
+const makeFullName2 = <T extends {firstName:string,lastName:string}>(obj:T)=>{
+    return {
+        ...obj,
+        fullName:obj.firstName+' '+obj.lastName
+    }
+}
+// This way we can accept an object with any amount of properties, so long as it has AT LEAST a firstName and lastName prop like so:
+const v2 = makeFullName2({firstName:'Bob',lastName:'Marley', age:30, isAlive:false})
+
+// Type variables with interfaces:
+
+interface Tab<T> {
+    id:number;
+    position:number;
+    data:T;
+}
+// This shows a case where we may have different data types for each tab, then we could have a few different tabs, like so:
+type NumberTab = Tab<number>;
+type StringTab = Tab<string>;
+// StringTab here is the equivelant of writing this:
+interface SameSame { // SameSame as in, this is the equivilant of StringTab
+    id:number;
+    position:number;
+    data:string;
+}
 
 // making a simple state:
 

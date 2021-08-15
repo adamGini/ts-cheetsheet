@@ -22,3 +22,5 @@ const isLoading2 = (state: LoadingState2) => state === 0;
 
 console.log(isLoading2(LoadingState2.loaded)); //will print false
 
+
+

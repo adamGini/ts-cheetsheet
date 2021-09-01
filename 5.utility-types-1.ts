@@ -73,3 +73,4 @@ const objOfNumbers = {
 }
 // MyUser['name'] does NOT refer to the name, but to the type of name, in our case its a string. If the name type were to change,
 // the above Record would change together with it.
+
